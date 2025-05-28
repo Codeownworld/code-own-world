@@ -1,3 +1,4 @@
+import { useState } from "react";
 import About from "./components/About";
 import Services from "./components/Services";
 import Portfolio from "./components/Portfolio";
@@ -5,8 +6,11 @@ import Contact from "./components/Contact";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import ReactGA from "react-ga4";
-import logo from "./logo.png"
+import logo from "./logo.png";
+
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   useEffect(() => {
     ReactGA.initialize("G-XXXXXXXXXX"); // Replace with your GA4 ID
     ReactGA.send({ hitType: "pageview", page: window.location.pathname });
@@ -16,24 +20,24 @@ function App() {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
+      setMenuOpen(false); // close menu on link click (mobile)
     }
   };
 
   return (
     <div className="font-sans bg-black text-white min-h-screen flex flex-col">
-      <header className="flex flex-col md:flex-row items-center justify-between p-4 bg-black shadow-md sticky top-0 z-50">
+      <header className="flex items-center justify-between p-4 bg-black shadow-md sticky top-0 z-50">
         {/* Logo */}
         <div
           className="flex items-center space-x-3 cursor-pointer"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setMenuOpen(false);
+          }}
         >
-          <img
-            src={logo} // adjust path as needed
-            alt="Code Own World Logo"
-            className="h-35 w-60 "
-          />
+          <img src={logo} alt="Code Own World Logo" className="h-35 w-45" />
           <motion.h1
-            className="text-3xl font-bold text-white mb-5"
+            className="text-2xl font-bold text-white"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -42,8 +46,8 @@ function App() {
           </motion.h1>
         </div>
 
-        {/* Navigation centered */}
-        <nav className="mt-3 md:mt-0 flex-grow flex justify-center space-x-8 text-lg font-medium">
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex flex-grow justify-center space-x-8 text-lg font-medium">
           <button
             onClick={() => scrollToSection("about")}
             className="hover:underline focus:outline-none"
@@ -69,7 +73,84 @@ function App() {
             Contact
           </button>
         </nav>
+
+        {/* Mobile Burger Menu Button */}
+        <button
+          className="md:hidden focus:outline-none text-white text-3xl"
+          aria-label="Toggle menu"
+          onClick={() => setMenuOpen((prev) => !prev)}
+        >
+          {/* Hamburger icon */}
+          {menuOpen ? (
+            // X icon for close
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          ) : (
+            // Hamburger icon
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          )}
+        </button>
       </header>
+
+      {/* Mobile Nav Dropdown */}
+      {menuOpen && (
+        <motion.nav
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          className="md:hidden bg-black px-4 pb-4 flex flex-col space-y-3 text-center font-medium text-lg"
+        >
+          <button
+            onClick={() => scrollToSection("about")}
+            className="hover:underline focus:outline-none"
+          >
+            About
+          </button>
+          <button
+            onClick={() => scrollToSection("services")}
+            className="hover:underline focus:outline-none"
+          >
+            Services
+          </button>
+          <button
+            onClick={() => scrollToSection("portfolio")}
+            className="hover:underline focus:outline-none"
+          >
+            Portfolio
+          </button>
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="hover:underline focus:outline-none"
+          >
+            Contact
+          </button>
+        </motion.nav>
+      )}
 
       {/* Sections */}
       <main className="flex-grow">

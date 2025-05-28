@@ -1,67 +1,127 @@
 import { motion } from "framer-motion";
 import { FaLaptopCode, FaRocket, FaUsers } from "react-icons/fa";
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.5,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 150,
+      damping: 20,
+    },
+  },
+};
+
 export default function About() {
   return (
-    <motion.section
-      className="max-w-4xl mx-auto p-10 bg-black rounded-xl shadow-lg mt-12"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-    >
-      <h2 className="text-4xl font-extrabold text-white mb-6 text-center">
-        About Code Own World
-      </h2>
-
-      <p className="text-lg text-gray-300 mb-6 leading-relaxed text-center max-w-xl mx-auto">
-        Hi, I'm <span className="font-semibold text-white">Mr Dev</span>. 
-        Code Own World is a solo remote software company dedicated to delivering
-        high-quality websites, powerful APIs, and comprehensive documentation.
-        We help startups and founders turn their ideas into reality with clean code and scalable solutions.
-      </p>
-
-      <div className="flex flex-col md:flex-row justify-around gap-8 text-center">
-        <motion.div
-          className="bg-gray-900 p-6 rounded-lg shadow-md flex flex-col items-center space-y-4 hover:shadow-white/50 transition-shadow cursor-default"
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <FaLaptopCode className="text-white text-5xl" />
-          <h3 className="text-xl font-semibold text-white">Custom Websites</h3>
-          <p className="text-gray-400 max-w-xs">
-            We build responsive, fast, and SEO-friendly websites tailored to your brand and needs.
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="bg-gray-900 p-6 rounded-lg shadow-md flex flex-col items-center space-y-4 hover:shadow-white/50 transition-shadow cursor-default"
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <FaRocket className="text-white text-5xl" />
-          <h3 className="text-xl font-semibold text-white">Robust APIs</h3>
-          <p className="text-gray-400 max-w-xs">
-            Develop scalable APIs that empower your applications with speed and security.
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="bg-gray-900 p-6 rounded-lg shadow-md flex flex-col items-center space-y-4 hover:shadow-white/50 transition-shadow cursor-default"
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <FaUsers className="text-white text-5xl" />
-          <h3 className="text-xl font-semibold text-white">Founder Support</h3>
-          <p className="text-gray-400 max-w-xs">
-            Work directly with a dedicated developer to bring clarity and focus to your product vision.
-          </p>
-        </motion.div>
+    <section className="relative overflow-hidden">
+      {/* Background Particles */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e]">
+        <div className="absolute w-full h-full opacity-10 animate-[pulse_15s_infinite] bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-[length:40px_40px]" />
       </div>
 
-      <p className="mt-10 text-center text-gray-500 italic">
-        “Quality is never an accident; it is always the result of intelligent effort.” – John Ruskin
-      </p>
-    </motion.section>
+      <motion.div
+        className="relative z-10 max-w-6xl mx-auto px-6 py-20 text-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={containerVariants}
+      >
+        <motion.h2
+          className="text-5xl md:text-6xl font-extrabold text-center mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500"
+          initial={{ y: -30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8, type: "spring" }}
+        >
+          Welcome to Code Own World
+        </motion.h2>
+<motion.p
+  className="text-xl text-center text-gray-400 mb-6"
+  initial={{ y: -20, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  transition={{ delay: 0.4, duration: 0.6 }}
+>
+  Own the Code. Rule the World.
+</motion.p>
+        <motion.p
+          className="text-lg md:text-xl text-gray-300 text-center max-w-3xl mx-auto mb-12"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          Hi, I'm <span className="text-white font-bold">Mr Dev</span>, a solo founder building clean, fast, and scalable digital products. From full-stack web apps to robust APIs – let's bring your ideas to life with excellence and clarity.
+        </motion.p>
+
+        {/* Feature Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          {[
+            {
+              icon: <FaLaptopCode className="text-5xl text-white" />,
+              title: "Custom Websites",
+              desc: "We create responsive, fast, and modern websites tailored to your brand—designed to enhance your digital presence and optimized for SEO.",
+            },
+            {
+              icon: <FaRocket className="text-5xl text-white" />,
+              title: "Robust APIs",
+              desc: "We develop robust APIs designed to power your application with speed, performance, and security.",
+            },
+            {
+              icon: <FaUsers className="text-5xl text-white" />,
+              title: "Founder Support",
+              desc: "Work directly with a dedicated developer to bring clarity and focus to your product vision.",
+            },
+          ].map(({ icon, title, desc }, i) => (
+            <motion.div
+              key={i}
+              className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl shadow-lg hover:shadow-cyan-400/40 transition-shadow"
+              variants={cardVariants}
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="mb-4">{icon}</div>
+              <h3 className="text-xl font-semibold mb-2 text-white">{title}</h3>
+              <p className="text-gray-300">{desc}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Quote */}
+        <motion.p
+          className="mt-14 text-center italic text-gray-400"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
+        >
+          “Quality is never an accident; it is always the result of intelligent effort.” – John Ruskin
+        </motion.p>
+
+        {/* CTA Button */}
+        <motion.div
+          className="mt-10 flex justify-center"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 2, type: "spring", stiffness: 100 }}
+        >
+          <a
+            href="#contact"
+            className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-full shadow-lg transition-all duration-300"
+          >
+            Let's Build Something Great
+          </a>
+        </motion.div>
+      </motion.div>
+    </section>
   );
 }
