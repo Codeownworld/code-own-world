@@ -82,48 +82,50 @@ export default function Contact() {
           </motion.div>
 
           {/* Contact Form */}
-          <motion.form
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="bg-white/10 p-10 rounded-3xl border border-white/20 backdrop-blur-md shadow-lg"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("Message sent successfully! (This is a mock)");
-            }}
-          >
-            <div className="mb-6">
-              <label className="block mb-3 text-lg font-semibold">Name</label>
-              <input
-                type="text"
-                required
-                className="w-full px-5 py-3 rounded-xl bg-white/20 text-white text-lg border border-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-              />
-            </div>
-            <div className="mb-6">
-              <label className="block mb-3 text-lg font-semibold">Email</label>
-              <input
-                type="email"
-                required
-                className="w-full px-5 py-3 rounded-xl bg-white/20 text-white text-lg border border-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-              />
-            </div>
-            <div className="mb-6">
-              <label className="block mb-3 text-lg font-semibold">Message</label>
-              <textarea
-                rows="5"
-                required
-                className="w-full px-5 py-3 rounded-xl bg-white/20 text-white text-lg border border-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full mt-4 bg-cyan-500 hover:bg-cyan-600 text-white text-xl font-semibold py-3 rounded-full transition duration-300"
-            >
-              Send Message
-            </button>
-          </motion.form>
+       <motion.form
+  action="https://formspree.io/f/meokjjga" // replace with your real Formspree endpoint
+  method="POST"
+  variants={fadeInUp}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  className="bg-white/10 p-10 rounded-3xl border border-white/20 backdrop-blur-md shadow-lg"
+>
+  <div className="mb-6">
+    <label className="block mb-3 text-lg font-semibold">Name</label>
+    <input
+      type="text"
+      name="name"
+      required
+      className="w-full px-5 py-3 rounded-xl bg-white/20 text-white text-lg border border-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+    />
+  </div>
+  <div className="mb-6">
+    <label className="block mb-3 text-lg font-semibold">Email</label>
+    <input
+      type="email"
+      name="email"
+      required
+      className="w-full px-5 py-3 rounded-xl bg-white/20 text-white text-lg border border-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+    />
+  </div>
+  <div className="mb-6">
+    <label className="block mb-3 text-lg font-semibold">Message</label>
+    <textarea
+      rows="5"
+      name="message"
+      required
+      className="w-full px-5 py-3 rounded-xl bg-white/20 text-white text-lg border border-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+    />
+  </div>
+  <button
+    type="submit"
+    className="w-full mt-4 bg-cyan-500 hover:bg-cyan-600 text-white text-xl font-semibold py-3 rounded-full transition duration-300"
+  >
+    Send Message
+  </button>
+</motion.form>
+
         </div>
       </div>
     </section>
