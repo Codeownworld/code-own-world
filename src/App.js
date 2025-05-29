@@ -35,7 +35,7 @@ function App() {
       setMenuOpen(false);
     }}
   >
-    <img src={logo} alt="Code Own World Logo" className="h-30 w-30" />
+    <img src={logo} alt="Code Own World Logo" className="h-20 w-20" />
     <motion.h1
       className="text-2xl font-bold text-white"
       initial={{ opacity: 0, y: -20 }}
