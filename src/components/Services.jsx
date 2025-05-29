@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Lottie from "react-lottie-player";
-import servicesBg from '../bg2.jpg';
+import servicesBg from '../bg1.jpg';
 
 // Lottie imports
 import webDevAnimation from '../lotties/webAnimation.json';
